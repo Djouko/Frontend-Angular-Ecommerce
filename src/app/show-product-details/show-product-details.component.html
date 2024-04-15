@@ -1,5 +1,6 @@
 <div class="mt-5 p-3">
 
+  <div class="d-flex">
   <mat-form-field appearance="outline" class="w-100">
     <mat-label>Search any product</mat-label>
     <input matInput
@@ -9,8 +10,11 @@
            id="searchKey"
            placeholder="Search any product">
     <mat-hint>Search any product</mat-hint>
-</mat-form-field>
- 
+    <mat-icon matSuffix>search</mat-icon>   
+  </mat-form-field>
+
+</div>
+<button mat-raised-button color="primary" class="ml-20" (click)="getReport()">Imprimer</button>
 <div *ngIf="showTable">
 
 

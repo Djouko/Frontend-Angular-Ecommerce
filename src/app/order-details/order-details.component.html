@@ -3,6 +3,7 @@
     <mat-button-toggle value="All" (click)="getAllOrderDetailsForAdmin('All')">All</mat-button-toggle>
     <mat-button-toggle value="Placed" (click)="getAllOrderDetailsForAdmin('Placed')">Placed</mat-button-toggle>
     <mat-button-toggle value="Delivered" (click)="getAllOrderDetailsForAdmin('Delivered')" >Delivered</mat-button-toggle>
+    <mat-button-toggle value="Imprimer" (click)="getReport()">Imprimer</mat-button-toggle>
   </mat-button-toggle-group>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-3">

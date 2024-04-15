@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OrderDetails } from '../_model/order-details.model';
 import { MyOrderDetails } from '../_model/order.model';
 import { Product } from '../_model/product.model';
-
+import { StringResult } from '../_model/stringResult';
+import { Report } from '../_model/report';
 @Injectable({
   providedIn: 'root'
 })
@@ -62,5 +63,14 @@ export class ProductService {
 
   public getCartDetails() {
     return this.httpClient.get("http://localhost:9090/getCartDetails");
+  }
+
+  public printProduct = (report: Report): Observable<StringResult> => {
+    const data = JSON.stringify(report);
+    return this.httpClient.post<StringResult>("http://localhost:9090/printProduct", data, {
+      headers: new HttpHeaders({
+        'Content-type' : 'application/json'
+      })
+    });
   }
 }

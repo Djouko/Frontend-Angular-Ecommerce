@@ -1,15 +1,19 @@
 <div class="container mt-5">
 
-   <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Search any product</mat-label>
-      <input matInput
-             #searchkeyword
-             (keyup)="searchByKeyword(searchkeyword.value)"
-             name="searchKey"
-             id="searchKey"
-             placeholder="Search any product">
-      <mat-hint>Search any product</mat-hint>
-  </mat-form-field>
+   <!-- *ngIf="productDetails.length > 0" -->
+   <div class="container mt-5 d-flex justify-content-between align-items-center">
+      <mat-form-field appearance="outline" class="flex-grow-1">
+        <mat-label>Search any product</mat-label>
+        <input matInput
+               #searchkeyword
+               (keyup)="searchByKeyword(searchkeyword.value)"
+               name="searchKey"
+               id="searchKey"
+               placeholder="Search any product">
+        <mat-hint>Search any product</mat-hint>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
 
    <mat-grid-list cols="4" rowHeight="3:5" gutterSize="10">
       <mat-grid-tile *ngFor="let p of productDetails">

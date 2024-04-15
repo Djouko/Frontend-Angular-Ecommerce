@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { ImageProcessingService } from '../image-processing.service';
 import { ShowProductImagesDialogComponent } from '../show-product-images-dialog/show-product-images-dialog.component';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_services/product.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-show-product-details',
@@ -24,10 +25,18 @@ export class ShowProductDetailsComponent implements OnInit {
   constructor(private productService: ProductService,
     public imagesDialog: MatDialog,
     private imageProcessingService: ImageProcessingService,
+    private http: HttpClient,
     private router: Router) { }
 
   ngOnInit(): void {
     this.getAllProducts();
+  }
+
+  getReport() {
+    this.http.get('http://localhost:9090/pdf', { responseType: 'blob' }).subscribe(res => {
+      const file = new Blob([res], { type: 'application/pdf' });
+      saveAs(file, 'ProductsList.pdf');
+    });
   }
 
   searchByKeyword(searchkeyword) {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../_services/product.service';
+import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-order-details',
@@ -13,10 +15,19 @@ export class OrderDetailsComponent implements OnInit {
 
   status: string = 'All';
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private http: HttpClient
+    ) { }
 
   ngOnInit(): void {
     this.getAllOrderDetailsForAdmin(this.status);
+  }
+
+  getReport() {
+    this.http.get('http://localhost:9090/pdfOrder', { responseType: 'blob' }).subscribe(res => {
+      const file = new Blob([res], { type: 'application/pdf' });
+      saveAs(file, 'OrderList.pdf');
+    });
   }
 
   getAllOrderDetailsForAdmin(statusParameter: string) {
